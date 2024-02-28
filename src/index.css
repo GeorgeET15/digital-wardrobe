@@ -1,13 +1,106 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+/* Updated styles for a compact e-commerce card */
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(45deg, #65def6, #3d33ea);
+  color: #fff;
+  transition: transform 0.3s ease-in-out;
+  width: 180px; /* Adjust the width as needed */
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-image-container {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover .card-image {
+  transform: scale(1.2);
+}
+
+.card-details {
+  margin-top: 8px;
+}
+
+.card-item-name {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.card-brand,
+.card-color {
+  font-size: 0.8rem;
+  color: #eee;
+}
+
+.grid {
+  display: flex;
+}
+
+/* Home.css */
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f8f8f8; /* Light background color */
+}
+
+.heading {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #333; /* Dark text color */
+}
+
+.buttons-container {
+  display: flex;
+  gap: 20px;
+}
+
+.button {
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #3498db; /* Blue color */
+  color: #fff; /* White text */
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #297fb8; /* Darker blue on hover */
 }
