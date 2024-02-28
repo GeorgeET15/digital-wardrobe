@@ -104,3 +104,30 @@ code {
 .button:hover {
   background-color: #297fb8; /* Darker blue on hover */
 }
+
+/*-------- Navbar --------*/
+
+nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #3498db;
+  position: fixed;
+  top: 0;
+  z-index: 1000; /* Ensure the navbar is on top of other elements */
+}
+
+nav .nav-button {
+  color: #a27ef8; /* Updated color */
+  background-color: #a7fde0; /* Updated color */
+  font-size: 20px;
+  padding: 10px 10px;
+  border-radius: 30px;
+  border: none;
+  margin: 10px;
+}
+
+nav .nav-button:disabled {
+  background-color: #b5b4b4; /* Updated color */
+  color: #a27ef8; /* Updated color */
+}

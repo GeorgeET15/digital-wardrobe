@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { AddItem } from "../components/AddItem";
+import NavBar from "../components/NavBar";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -19,7 +20,8 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <h1 className="heading">Wardrobe App</h1>
+      <NavBar />
+      <h1 className="heading">Your Online Wardrobe</h1>
       <div className="buttons-container">
         <button className="category-button button" onClick={openTop}>
           Explore Tops
