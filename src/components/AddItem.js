@@ -4,6 +4,7 @@ import { storage, firestore } from "../firebase";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { collection, addDoc } from "firebase/firestore";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import CircularProgress from "@mui/material/CircularProgress";
 
 Modal.setAppElement("#root");
 
@@ -15,6 +16,7 @@ const AddItem = () => {
   const [color, setColor] = useState("");
   const [type, setType] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
+  const [loading, setLoading] = useState(false); // Add loading state
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -27,6 +29,7 @@ const AddItem = () => {
     setBrand("");
     setColor("");
     setType("");
+    setLoading(false);
   };
 
   const handleFileChange = (e) => {
@@ -48,11 +51,11 @@ const AddItem = () => {
       return;
     }
 
+    setLoading(true); // Set loading to true during upload
+
     // Your remove.bg API key
     const apiKey = "QwtSq5U6bhiAaWN2eQjRji6g";
-
     const apiUrl = "https://api.remove.bg/v1.0/removebg";
-
     const storageRef = ref(storage, `${type}/${file.name}`);
 
     try {
@@ -71,6 +74,7 @@ const AddItem = () => {
 
       if (!response.ok) {
         console.error("Error removing background:", response.statusText);
+        setLoading(false); // Set loading to false on error
         return;
       }
 
@@ -104,9 +108,11 @@ const AddItem = () => {
       console.log("Document written with ID: ", clothData.id);
       console.log("Image uploaded successfully. Download URL:", downloadURL);
 
+      setLoading(false); // Set loading to false after successful upload
       closeModal();
     } catch (error) {
       console.error("Error uploading photo:", error);
+      setLoading(false); // Set loading to false on error
     }
   };
 
@@ -188,7 +194,7 @@ const AddItem = () => {
         </div>
         <div className="button-container">
           <button className="upload-button" onClick={handleUpload}>
-            Upload
+            {loading ? <CircularProgress size={20} /> : "Upload"}
           </button>
           <button className="close-button" onClick={closeModal}>
             Close
