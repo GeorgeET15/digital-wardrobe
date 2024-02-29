@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import AddItem from "../components/AddItem";
 import NavBar from "../components/NavBar";
 
 import RandomOutfit from "../components/RandomOutfit";
@@ -27,13 +26,13 @@ const Home = () => {
         <NavBar />
         <h1 className="heading">Your Online Wardrobe</h1>
         <div className="buttons-container">
-          <button className="category-button button" onClick={openTop}>
+          <button className="button" onClick={openTop}>
             Explore Tops
           </button>
-          <button className="category-button button" onClick={openBottom}>
+          <button className="button" onClick={openBottom}>
             Discover Bottoms
           </button>
-          <button className="category-button button" onClick={openFootWear}>
+          <button className="button" onClick={openFootWear}>
             Browse Footwear
           </button>
         </div>

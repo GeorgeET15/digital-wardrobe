@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import { storage, firestore } from "../firebase";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { collection, addDoc } from "firebase/firestore";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 Modal.setAppElement("#root");
 
@@ -83,7 +84,7 @@ const AddItem = () => {
   return (
     <div>
       <button className="add-button" onClick={openModal}>
-        ADD
+        <CloudUploadIcon />
       </button>
 
       <Modal

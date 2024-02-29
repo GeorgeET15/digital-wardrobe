@@ -17,32 +17,33 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  padding: 20px; /* Adjusted padding for mobile */
+  padding: 40px;
+  background-color: #efefd0;
 }
 
 /* Heading Styles */
 .heading {
-  font-size: 24px; /* Adjusted font size for mobile */
+  font-size: 36px; /* Larger font size for impact */
   font-weight: bold;
-  margin-bottom: 15px; /* Adjusted margin for mobile */
-  color: #333; /* Dark text color */
+  margin-bottom: 20px; /* Increased margin for separation */
+  color: #ff6b35; /* Highlighted text color */
   text-align: center;
 }
 
 /* Buttons Styles */
 .buttons-container {
   display: flex;
-  flex-direction: column; /* Adjusted for mobile */
-  gap: 15px; /* Adjusted gap for mobile */
-  margin-top: 20px;
+  flex-direction: row; /* Adjusted for a horizontal layout */
+  gap: 20px; /* Increased gap between buttons */
+  margin-top: 30px; /* Increased margin for separation */
 }
 
 .button {
-  padding: 12px 20px; /* Adjusted padding for mobile */
-  border-radius: 8px;
-  font-size: 14px; /* Adjusted font size for mobile */
+  padding: 15px 30px; /* Increased padding for a larger button */
+  border-radius: 10px; /* Rounded corners for a modern look */
+  font-size: 16px; /* Slightly increased font size */
   font-weight: bold;
-  background-color: #3498db; /* Green button color */
+  background-color: #ff6b35; /* Stylish green button color */
   color: #fff; /* White text color */
   cursor: pointer;
   border: none;
@@ -51,36 +52,47 @@ body {
 }
 
 .button:hover {
-  background-color: #86cd82; /* Darker green on hover */
+  background-color: #0a3a87; /* Darker green on hover for contrast */
 }
 
-/* General Styling */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 15px; /* Adjusted gap for mobile */
-  justify-content: center;
-}
+/* Media Query for Mobile Screens */
+@media (max-width: 767px) {
+  /* Adjust styles for mobile screens here */
+  .home-container {
+    padding: 10px; /* Adjusted padding for mobile */
+  }
 
-@media (min-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(
-      3,
-      minmax(200px, 1fr)
-    ); /* Adjusted for desktop */
+  .heading {
+    font-size: 20px; /* Adjusted font size for mobile */
+    margin-bottom: 10px; /* Adjusted margin for mobile */
+  }
+
+  .button {
+    padding: 10px 15px; /* Adjusted padding for mobile */
+    font-size: 12px; /* Adjusted font size for mobile */
   }
 }
 
+/* General Styling */
+/* Styles for the shopping website look */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  justify-content: center;
+}
+
 .card {
+  position: relative;
   border: 1px solid #ddd;
   border-radius: 10px;
-  padding: 12px;
-  margin: 8px;
+  overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background: #3498db; /* Green card background color */
-  color: #fff;
+  background: #fff;
   transition: transform 0.3s ease-in-out;
-  width: 150px; /* Adjusted width for mobile */
+  cursor: pointer;
+  border: none;
 }
 
 .card:hover {
@@ -88,8 +100,12 @@ body {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+.card:hover .delete-button {
+  display: block;
+}
+
 .card-image-container {
-  height: 150px; /* Adjusted height for mobile */
+  height: 200px;
   overflow: hidden;
 }
 
@@ -100,11 +116,11 @@ body {
 }
 
 .card-details {
-  padding: 12px; /* Adjusted padding for mobile */
+  padding: 16px;
 }
 
 .item-name {
-  font-size: 1rem; /* Adjusted font size for mobile */
+  font-size: 1.2rem;
   font-weight: bold;
   margin-bottom: 8px;
   color: #333;
@@ -114,25 +130,43 @@ body {
   color: #777;
 }
 
+/* Styles for the delete button */
+.delete-button {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
 /* Navbar Styling */
 nav {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  background-color: #3498db; /* Green navbar background color */
+  background-color: #efefd0; /* Green navbar background color */
   position: fixed;
   top: 0;
   z-index: 1000;
 }
 
 nav .nav-button {
-  color: #a27ef8;
-  background-color: #8ae9c1; /* Green navbar button color */
+  color: #ff6b35;
+  background-color: #ff6b35; /* Green navbar button color */
   font-size: 16px; /* Adjusted font size for mobile */
   padding: 12px 16px;
   border-radius: 30px;
   border: none;
   margin: 10px;
+}
+
+.nav-button:hover {
+  background-color: #f7c59f;
 }
 
 nav .nav-button:disabled {
@@ -141,10 +175,11 @@ nav .nav-button:disabled {
 }
 
 /* AddItem.css */
+
 .modal {
   background-color: #fff;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 12px; /* Rounded corners for a modern touch */
   max-width: 400px;
   margin: 0 auto;
   position: absolute;
@@ -152,6 +187,7 @@ nav .nav-button:disabled {
   left: 50%;
   transform: translate(-50%, -50%);
   animation: fadeIn 0.5s ease-in-out;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .overlay {
@@ -159,52 +195,51 @@ nav .nav-button:disabled {
 }
 
 .add-button {
-  background-color: #8ae9c1; /* Green add button color */
+  background-color: #ff6b35;
   color: #fff;
-  padding: 10px 15px;
+  padding: 14px 24px; /* Increased padding for a more prominent button */
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   outline: none;
   transition: background-color 0.3s ease;
 }
 
 .add-button:hover {
-  background-color: #86cd82; /* Darker green on hover */
+  background-color: #f7c59f;
 }
 
 .button-container {
   display: flex;
-  flex-direction: column; /* Adjusted for mobile */
   justify-content: space-between;
-  margin-top: 15px; /* Adjusted margin for mobile */
+  margin-top: 20px;
 }
 
 .upload-button,
 .close-button {
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 12px 20px;
+  border-radius: 8px;
   cursor: pointer;
   outline: none;
   transition: background-color 0.3s ease;
 }
 
 .upload-button {
-  background-color: #27ae60; /* Green upload button color */
+  background-color: #45a049;
   color: #fff;
 }
 
 .upload-button:hover {
-  background-color: #219a52; /* Darker green on hover */
+  background-color: #2980b9;
 }
 
 .close-button {
-  background-color: #e74c3c; /* Red close button color */
+  background-color: #e74c3c;
   color: #fff;
 }
 
 .close-button:hover {
-  background-color: #d23321; /* Darker red on hover */
+  background-color: #d23321;
 }
 
 @keyframes fadeIn {
@@ -223,20 +258,20 @@ nav .nav-button:disabled {
 }
 
 .shuffle-button {
-  padding: 18px 35px; /* Increased padding for a larger button */
-  font-size: 18px; /* Larger font size */
+  padding: 15px 25px; /* Slightly increased padding for better appearance */
+  border-radius: 12px; /* Rounded corners */
+  font-size: 16px; /* Slightly increased font size */
   font-weight: bold;
-  background-color: #3498db;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
+  background-color: #ff6b35; /* Updated green button color */
+  color: #fff; /* White text color */
   cursor: pointer;
+  border: none;
   outline: none;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.5s ease; /* Added transform transition */
 }
 
 .shuffle-button:hover {
-  background-color: #297fb8;
+  background-color: #f7c59f; /* Darker green on hover */
 }
 
 .outfit-display {
@@ -245,23 +280,24 @@ nav .nav-button:disabled {
 
 .outfit-card {
   display: flex;
-  flex-direction: column; /* Adjusted for mobile */
-  align-items: center; /* Adjusted for mobile */
-  margin-top: 15px; /* Increased margin */
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px; /* Increased margin */
 }
 
 .outfit-card img {
-  width: 120px; /* Adjusted image size for mobile */
-  height: 120px;
+  width: 150px; /* Increased image size */
+  height: 150px;
   object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 10px; /* Adjusted margin for mobile */
+  border-radius: 12px; /* Rounded corners */
+  margin-bottom: 15px; /* Increased margin */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added subtle box-shadow */
 }
 
 .outfit-display h2 {
-  font-size: 24px; /* Adjusted font size for mobile */
-  margin-bottom: 15px; /* Increased margin */
-  color: #333;
+  font-size: 28px; /* Increased font size */
+  margin-bottom: 20px; /* Increased margin */
+  color: #ff6b35; /* Updated text color to a shade of blue */
 }
 
 /* Media Query for Small Screens */

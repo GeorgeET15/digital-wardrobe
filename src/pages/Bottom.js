@@ -33,16 +33,26 @@ const Bottom = () => {
     fetchData();
   }, []); // Run only once when the component mounts
 
+  const handleDelete = (id) => {
+    // Filter out the deleted item from the state
+    setClothesData((prevData) =>
+      prevData.filter((clothes) => clothes.id !== id)
+    );
+  };
+
   return (
-    <div>
+    <div style={{ margin: "20px" }}>
+      <h1 style={{ color: "#ff6b35" }}>Bottom</h1>
       <div className="grid">
         {clothesData.map((clothes) => (
           <Cards
             key={clothes.id}
+            id={clothes.id}
             itemName={clothes.itemName}
             brand={clothes.brand}
             color={clothes.color}
             imageUrl={clothes.imageUrl}
+            onDelete={handleDelete}
           />
         ))}
       </div>

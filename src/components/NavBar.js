@@ -8,7 +8,7 @@ const NavBar = () => {
         <h1
           style={{
             fontSize: "30px",
-            color: "#a7fde0",
+            color: "#ff6b35",
             marginLeft: "20px",
           }}
         >

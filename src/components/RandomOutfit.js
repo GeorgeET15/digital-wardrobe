@@ -32,11 +32,6 @@ const RandomOutfit = () => {
 
   return (
     <div className="random-outfit-container">
-      {/* Shuffle button with animation */}
-      <button className="shuffle-button" onClick={shuffleOutfit}>
-        SHUFFLE OUTFIT
-      </button>
-
       {/* Display the shuffled outfit */}
       {outfit && (
         <div className="outfit-display">
@@ -48,6 +43,11 @@ const RandomOutfit = () => {
           </div>
         </div>
       )}
+
+      {/* Shuffle button with animation */}
+      <button className="shuffle-button" onClick={shuffleOutfit}>
+        SHUFFLE OUTFIT
+      </button>
     </div>
   );
 };
