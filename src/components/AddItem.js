@@ -104,7 +104,9 @@ const AddItem = () => {
         overlayClassName="overlay"
       >
         <h2>Add Clothes</h2>
-        {imagePreview && <img src={imagePreview} alt="Selected" />}
+        <div className="image-preview-container">
+          {imagePreview && <img src={imagePreview} alt="Selected" />}
+        </div>
         <input type="file" onChange={handleFileChange} />
         <input
           type="text"

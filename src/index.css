@@ -251,6 +251,14 @@ nav .nav-button:disabled {
   }
 }
 
+.image-preview-container {
+  display: none; /* Initially hide the image preview */
+
+  @media (min-width: 768px) {
+    display: block; /* Show the image preview on screens wider than 768px (adjust as needed) */
+  }
+}
+
 /* RandomOutfit.css */
 .random-outfit-container {
   text-align: center;
