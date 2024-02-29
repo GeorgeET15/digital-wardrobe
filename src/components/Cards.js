@@ -1,4 +1,6 @@
 import React from "react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function Cards({ itemName, brand, color, imageUrl }) {
   return (
@@ -7,9 +9,9 @@ function Cards({ itemName, brand, color, imageUrl }) {
         <img className="card-image" src={imageUrl} alt={itemName} />
       </div>
       <div className="card-details">
-        <h2 className="card-item-name">{itemName}</h2>
-        <p className="card-brand">Brand: {brand}</p>
-        <p className="card-color">Color: {color}</p>
+        <h2 className="item-name">{itemName}</h2>
+        <p className="brand-color">Brand: {brand}</p>
+        <p className="brand-color">Color: {color}</p>
       </div>
     </div>
   );

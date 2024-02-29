@@ -1,12 +1,12 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import Modal from "react-modal";
 import { storage, firestore } from "../firebase";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { collection, addDoc } from "firebase/firestore";
 
-Modal.setAppElement("#root"); // Set the app element for react-modal
+Modal.setAppElement("#root");
 
-export const AddItem = () => {
+const AddItem = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [file, setFile] = useState(null);
   const [itemName, setItemName] = useState("");
@@ -24,6 +24,7 @@ export const AddItem = () => {
     setItemName("");
     setBrand("");
     setColor("");
+    setType("");
   };
 
   const handleFileChange = (e) => {
@@ -32,25 +33,21 @@ export const AddItem = () => {
   };
 
   const handleUpload = async () => {
-    if (!file || !itemName || !brand || !color) {
+    if (!file || !itemName || !brand || !color || !type) {
       alert("Please fill in all details and upload an image.");
       return;
     }
 
-    // Upload image to Firebase Storage
     const storageRef = ref(storage, `${type}/${file.name}`);
 
     try {
-      // Read the file as a Data URL
       const reader = new FileReader();
 
       reader.onload = async (e) => {
         const dataURL = e.target.result;
 
-        // Upload the Data URL to Firebase Storage
         await uploadString(storageRef, dataURL, "data_url");
 
-        // Retrieve the download URL
         const downloadURL = await getDownloadURL(storageRef);
 
         try {
@@ -76,29 +73,25 @@ export const AddItem = () => {
       console.error("Error uploading photo:", error);
     }
   };
+
   const handleCheckboxChange = (e) => {
     const value = e.target.value;
 
-    // Update the type state based on the checked status
-    setType((prevType) => {
-      if (prevType === value) {
-        return ""; // Uncheck if already checked
-      } else {
-        return value; // Check if not checked
-      }
-    });
+    setType((prevType) => (prevType === value ? "" : value));
   };
+
   return (
     <div>
       <button className="add-button" onClick={openModal}>
         ADD
       </button>
 
-      {/* Modal for adding clothes */}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Add Clothes Modal"
+        className="modal"
+        overlayClassName="overlay"
       >
         <h2>Add Clothes</h2>
         <input type="file" onChange={handleFileChange} />
@@ -126,7 +119,7 @@ export const AddItem = () => {
             id="type-shirt"
             name="type-shirt"
             value="Top"
-            checked={type.includes("Top")}
+            checked={type === "Top"}
             onChange={handleCheckboxChange}
           />
           <label htmlFor="type-shirt"> Top</label>
@@ -137,7 +130,7 @@ export const AddItem = () => {
             id="type-pants"
             name="type-pants"
             value="Bottom"
-            checked={type.includes("Bottom")}
+            checked={type === "Bottom"}
             onChange={handleCheckboxChange}
           />
           <label htmlFor="type-pants"> Bottom</label>
@@ -148,15 +141,23 @@ export const AddItem = () => {
             id="type-shoes"
             name="type-shoes"
             value="Foot Wear"
-            checked={type.includes("Foot Wear")}
+            checked={type === "Foot Wear"}
             onChange={handleCheckboxChange}
           />
           <label htmlFor="type-shoes"> Foot Wear</label>
           <br />
         </div>
-        <button onClick={handleUpload}>Upload</button>
-        <button onClick={closeModal}>Close</button>
+        <div className="button-container">
+          <button className="upload-button" onClick={handleUpload}>
+            Upload
+          </button>
+          <button className="close-button" onClick={closeModal}>
+            Close
+          </button>
+        </div>
       </Modal>
     </div>
   );
 };
+
+export default AddItem;
