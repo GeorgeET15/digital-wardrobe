@@ -48,37 +48,63 @@ const AddItem = () => {
       return;
     }
 
+    // Your remove.bg API key
+    const apiKey = "QwtSq5U6bhiAaWN2eQjRji6g";
+
+    const apiUrl = "https://api.remove.bg/v1.0/removebg";
+
     const storageRef = ref(storage, `${type}/${file.name}`);
 
     try {
-      const reader = new FileReader();
+      // Remove background
+      const formData = new FormData();
+      formData.append("image_file", file, file.name);
+      formData.append("size", "auto");
 
-      reader.onload = async (e) => {
-        const dataURL = e.target.result;
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "X-Api-Key": apiKey,
+        },
+        body: formData,
+      });
 
-        await uploadString(storageRef, dataURL, "data_url");
+      if (!response.ok) {
+        console.error("Error removing background:", response.statusText);
+        return;
+      }
 
-        const downloadURL = await getDownloadURL(storageRef);
+      const data = await response.blob();
 
-        try {
-          const clothData = await addDoc(collection(firestore, type), {
-            itemName,
-            brand,
-            color,
-            downloadURL,
-          });
+      // Convert Blob to ArrayBuffer
+      const arrayBuffer = await new Response(data).arrayBuffer();
 
-          console.log("Document written with ID: ", clothData.id);
-        } catch (e) {
-          console.error("Error adding document: ", e);
-        }
+      // Convert ArrayBuffer to base64 string
+      const base64String = btoa(
+        new Uint8Array(arrayBuffer).reduce(
+          (data, byte) => data + String.fromCharCode(byte),
+          ""
+        )
+      );
 
-        console.log("Image uploaded successfully. Download URL:", downloadURL);
+      // Upload base64 string to Firebase Storage
+      await uploadString(storageRef, base64String, "base64", {
+        contentType: "image/jpeg",
+      });
 
-        closeModal();
-      };
+      const downloadURL = await getDownloadURL(storageRef);
 
-      reader.readAsDataURL(file);
+      const clothData = await addDoc(collection(firestore, type), {
+        itemName,
+        brand,
+        color,
+        downloadURL,
+      });
+
+      console.log("Document written with ID: ", clothData.id);
+      console.log("Image uploaded successfully. Download URL:", downloadURL);
+
+      closeModal();
     } catch (error) {
       console.error("Error uploading photo:", error);
     }
