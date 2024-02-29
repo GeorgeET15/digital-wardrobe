@@ -309,3 +309,14 @@ nav .nav-button:disabled {
     font-size: 22px; /* Adjusted font size for small screens */
   }
 }
+
+/*Carousel*/
+
+.top-card {
+  margin: 8px;
+  // other styles...
+
+  @media (max-width: 767px) {
+    margin: 8px 0; /* Add space only at the top and bottom for mobile view */
+  }
+}
