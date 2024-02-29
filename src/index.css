@@ -329,8 +329,9 @@ nav .nav-button:disabled {
   height: auto; /* Maintain aspect ratio for images */
 }
 
-@media (max-width: 767px) {
+/* Styles for larger screens (default) */
+@media (min-width: 768px) {
   .top-card {
-    margin: 0; /* Remove horizontal margin on small screens */
+    margin: 0; /* Remove horizontal margin on larger screens */
   }
 }
