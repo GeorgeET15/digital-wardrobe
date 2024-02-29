@@ -14,6 +14,7 @@ const AddItem = () => {
   const [brand, setBrand] = useState("");
   const [color, setColor] = useState("");
   const [type, setType] = useState("");
+  const [imagePreview, setImagePreview] = useState(null);
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -30,6 +31,14 @@ const AddItem = () => {
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
+
+    // Display image preview
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImagePreview(reader.result);
+    };
+    reader.readAsDataURL(selectedFile);
+
     setFile(selectedFile);
   };
 
@@ -95,6 +104,7 @@ const AddItem = () => {
         overlayClassName="overlay"
       >
         <h2>Add Clothes</h2>
+        {imagePreview && <img src={imagePreview} alt="Selected" />}
         <input type="file" onChange={handleFileChange} />
         <input
           type="text"

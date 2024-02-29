@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Cards from "../components/Cards";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore"; // Import deleteDoc
 import { firestore } from "../firebase";
 
 const Bottom = () => {
@@ -33,11 +33,10 @@ const Bottom = () => {
     fetchData();
   }, []); // Run only once when the component mounts
 
-  const handleDelete = (id) => {
-    // Filter out the deleted item from the state
-    setClothesData((prevData) =>
-      prevData.filter((clothes) => clothes.id !== id)
-    );
+  const handleDelete = async (id) => {
+    const deleteVal = doc(firestore, "Bottom", id);
+    await deleteDoc(deleteVal);
+    window.location.reload();
   };
 
   return (
